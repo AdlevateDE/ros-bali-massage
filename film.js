@@ -20,8 +20,8 @@
     box.dataset.id = t.id;
     const dl = el('dl', 'scene__prices');
     dl.setAttribute('data-todo', '');
-    Object.keys(t.prices).forEach(m => { const d = el('div'); d.append(el('dt', '', m + ' min'), el('dd', '', money(t.prices[m]))); dl.appendChild(d); });
-    const btn = el('button', 'btn btn--ghost btn--sm', 'Choose this');
+    Object.keys(t.prices).forEach(m => { const d = el('div'); d.append(el('dt', '', m + T(' min')), el('dd', '', money(t.prices[m]))); dl.appendChild(d); });
+    const btn = el('button', 'btn btn--ghost btn--sm', T('Choose this'));
     btn.type = 'button';
     btn.addEventListener('click', () => pick(t));
     box.append(el('p', 'scene__shown', t.film.shown), el('h3', '', t.name), el('p', '', t.blurb), dl, btn);
@@ -75,7 +75,7 @@
   // label: at = anchor on the picture, to = offset of the text in screen px (wide screens / phones)
   const ANAT = {
     back: [
-      { kind: 'muscle', lines: both(erector), label: { text: 'Long back muscles', at: [53.7, 40], to: [150, 46], toPhone: [40, 86] } },
+      { kind: 'muscle', lines: both(erector), label: { text: 'Long back muscles', at: [53.2, 31], to: [170, -40], toPhone: [50, -70] } },
       { kind: 'muscle', lines: both(lats), label: { text: 'Lats', at: [59.6, 37], to: [150, -30], toPhone: [26, -96] } }
     ],
     blade: [
@@ -225,7 +225,8 @@
     const to = phone ? l.toPhone : l.to;
     let lx = x + to[0], ly = y + to[1];
     ctx.font = '600 ' + (phone ? 13 : 14) + 'px Figtree, system-ui, sans-serif';
-    const w = ctx.measureText(l.text).width;
+    const text = T(l.text);
+    const w = ctx.measureText(text).width;
     const right = to[0] >= 0;
     lx = Math.min(W - w - 14, Math.max(14 + (right ? 0 : w), lx)); // keep the text on the screen
     ly = Math.min(H - 20, Math.max(24, ly));
@@ -235,7 +236,7 @@
     ctx.beginPath(); ctx.arc(x, y, 3.2, 0, 6.283); ctx.fill();
     ctx.textAlign = right ? 'left' : 'right'; ctx.textBaseline = 'middle';
     ctx.shadowColor = 'rgba(30,21,16,.95)'; ctx.shadowBlur = 10;
-    ctx.fillText(l.text, lx, ly);
+    ctx.fillText(text, lx, ly);
     ctx.shadowBlur = 0;
   }
 

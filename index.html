@@ -35,7 +35,10 @@
         <span class="wordmark__name" data-bind="brand.short">Ros</span>
         <span class="wordmark__tag" data-bind="brand.tagline">Bali Massage</span>
       </a>
-      <a class="btn btn--wa btn--sm js-wa" data-wa="hello" href="#book"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp</span></a>
+      <div class="topline__right">
+        <div class="lang" id="lang" role="group" aria-label="Language"><a href="?lang=en" data-lang="en" lang="en">EN</a><a href="?lang=id" data-lang="id" lang="id">ID</a></div>
+        <a class="btn btn--wa btn--sm js-wa" data-wa="hello" href="#book" aria-label="WhatsApp"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp</span></a>
+      </div>
     </div>
 
     <div class="hero__grid">
@@ -261,6 +264,7 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="config.js"></script>
+<script src="i18n.js"></script>
 <script src="app.js"></script>
 <script src="film.js"></script>
 </body>

@@ -1,6 +1,12 @@
 (() => {
   'use strict';
 
+  // Always open at the top: phone browsers otherwise jump back to where the page was left last time
+  try {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (!location.hash) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  } catch (e) { /* older browsers: nothing to do */ }
+
   const S = window.SITE;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -39,11 +45,11 @@
   if (S.draft) {
     document.documentElement.classList.add('is-draft');
     $('#draftbar').hidden = false;
-    $('#draft-count').textContent = '· ' + S.todo.length + ' details are still examples (dashed boxes). Tap for the list.';
+    $('#draft-count').textContent = '· ' + S.todo.length + T(' details are still examples (dashed boxes). Tap for the list.');
     S.todo.forEach(t => $('#draft-list').appendChild(el('li', '', t)));
   }
 
-  $('#hero-areas').textContent = S.areas.slice(0, 4).join(', ') + (S.areas.length > 4 ? ' and nearby' : '');
+  $('#hero-areas').textContent = S.areas.slice(0, 4).join(', ') + (S.areas.length > 4 ? T(' and nearby') : '');
   S.areas.forEach((a, i) => {
     const s = el('span', '', a);
     if (i < S.areas.length - 1) s.appendChild(el('i', '', '·'));
@@ -201,7 +207,8 @@
     b.dataset.side = z.side; b.dataset.zone = z.id;
     b.style.left = z.x + '%'; b.style.top = z.y + '%';
     b.style.setProperty('--lead', z.lead + 'cqw');
-    b.setAttribute('aria-label', z.label + ', zoom in');
+    b.style.setProperty('--room', (z.side === 'r' ? 100 - z.x - z.lead : z.x - z.lead) + 'cqw'); // space left for the label
+    b.setAttribute('aria-label', z.label + T(', zoom in'));
     b.append(el('span', 'spot__dot'), el('span', 'spot__label', z.label));
     b.addEventListener('click', () => zoomIn(z.id));
     $('#spots').appendChild(b);
@@ -222,10 +229,10 @@
     if (!z) return;
     const picked = state.zones.includes(z.id);
     $('#zoom-title').textContent = z.label;
-    $('#zoom-fibres').textContent = 'Fibres: ' + z.fibres;
+    $('#zoom-fibres').textContent = T('Fibres: ') + z.fibres;
     $('#zoom-line').textContent = z.line;
-    $('#zoom-hint').textContent = picked ? 'Loosened. It is in your booking.' : 'Press and hold to loosen the knot.';
-    $('#zoom-add').textContent = picked ? 'Take it out' : 'Add to my massage';
+    $('#zoom-hint').textContent = picked ? T('Loosened. It is in your booking.') : T('Press and hold to loosen the knot.');
+    $('#zoom-add').textContent = picked ? T('Take it out') : T('Add to my massage');
   }
   function zoomIn(id) {
     const z = zone(id);
@@ -269,8 +276,8 @@
       const li = el('li', 'member' + (i === 0 ? ' member--lead' : '') + (empty ? ' member--empty' : ''));
       const pic = el('span', 'member__pic');
       if (m.photo) { const img = new Image(); img.src = m.photo; img.alt = m.name; img.loading = 'lazy'; pic.appendChild(img); }
-      else pic.textContent = empty ? 'Photo' : m.name.charAt(0);
-      li.append(pic, el('span', '', m.name || 'Name'));
+      else pic.textContent = empty ? T('Photo') : m.name.charAt(0);
+      li.append(pic, el('span', '', m.name || T('Name')));
       if (m.role) li.appendChild(el('small', '', m.role));
       grid.appendChild(li);
     });
@@ -294,7 +301,7 @@
     updaters.push(() => b.setAttribute('aria-pressed', String(state.zones.includes(z.id))));
   });
   (() => {
-    const all = chip('Whole body');
+    const all = chip(T('Whole body'));
     all.addEventListener('click', () => { state.zones = state.zones.length === S.zones.length ? [] : S.zones.map(z => z.id); afterZones(); });
     $('#f-zones').appendChild(all);
     updaters.push(() => all.setAttribute('aria-pressed', String(state.zones.length === S.zones.length)));
@@ -304,18 +311,18 @@
     const t = treatment(id);
     if (!t.prices[state.minutes]) state.minutes = Number(Object.keys(t.prices)[0]);
   });
-  radio($('#f-len'), [60, 90, 120].map(m => ({ label: m + ' min', value: m, off: () => !treatment(state.treatment).prices[m] })), 'minutes', () => { state.manual = true; });
-  radio($('#f-press'), ['Gentle', 'Medium', 'Firm'].map(p => ({ label: p, value: p })), 'pressure');
-  radio($('#f-day'), [{ label: 'Today', value: 'today' }, { label: 'Tomorrow', value: 'tomorrow' }, { label: 'Pick a date', value: 'date' }], 'day');
-  radio($('#f-time'), ['Morning', 'Afternoon', 'Evening'].map(p => ({ label: p, value: p })), 'time');
+  radio($('#f-len'), [60, 90, 120].map(m => ({ label: m + T(' min'), value: m, off: () => !treatment(state.treatment).prices[m] })), 'minutes', () => { state.manual = true; });
+  radio($('#f-press'), ['Gentle', 'Medium', 'Firm'].map(p => ({ label: T(p), value: p })), 'pressure');
+  radio($('#f-day'), [{ label: T('Today'), value: 'today' }, { label: T('Tomorrow'), value: 'tomorrow' }, { label: T('Pick a date'), value: 'date' }], 'day');
+  radio($('#f-time'), ['Morning', 'Afternoon', 'Evening'].map(p => ({ label: T(p), value: p })), 'time');
   radio($('#f-people'), [1, 2, 3, 4].map(n => ({ label: String(n), value: n })), 'people');
 
   const fDate = $('#f-date'), fPlace = $('#f-place'), fArea = $('#f-area'), fNote = $('#f-note');
   const pad = n => String(n).padStart(2, '0');
   const today = new Date();
   fDate.min = today.getFullYear() + '-' + pad(today.getMonth() + 1) + '-' + pad(today.getDate());
-  fArea.appendChild(new Option('Area', ''));
-  S.areas.concat('Somewhere else').forEach(a => fArea.appendChild(new Option(a, a)));
+  fArea.appendChild(new Option(T('Area'), ''));
+  S.areas.concat(T('Somewhere else')).forEach(a => fArea.appendChild(new Option(a, a)));
   [[fDate, 'date'], [fPlace, 'place'], [fArea, 'area'], [fNote, 'note']].forEach(([n, key]) => {
     n.addEventListener('input', () => { state[key] = n.value.trim(); state.dirty = true; update(); });
   });
@@ -325,27 +332,27 @@
     const now = new Date();
     let d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     let label = '';
-    if (state.day === 'today') label = 'Today';
-    else if (state.day === 'tomorrow') { d.setDate(d.getDate() + 1); label = 'Tomorrow'; }
+    if (state.day === 'today') label = T('Today');
+    else if (state.day === 'tomorrow') { d.setDate(d.getDate() + 1); label = T('Tomorrow'); }
     else if (state.date) { const p = state.date.split('-').map(Number); d = new Date(p[0], p[1] - 1, p[2]); }
     else d = null;
-    const nice = d ? d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }) : 'Date to be agreed';
-    return (label ? label + ' (' + nice + ')' : nice) + (state.time ? ', ' + state.time.toLowerCase() : ', time flexible');
+    const nice = d ? d.toLocaleDateString(window.DATE_LOCALE, { weekday: 'short', day: 'numeric', month: 'short' }) : T('Date to be agreed');
+    return (label ? label + ' (' + nice + ')' : nice) + ', ' + (state.time ? T(state.time).toLowerCase() : T('time flexible'));
   }
   function bookingMessage() {
     const t = treatment(state.treatment);
-    const lines = ['Hi ' + S.brand.short + '! I would like to book a massage.', ''];
-    lines.push('Massage: ' + t.name + ', ' + state.minutes + ' min');
-    lines.push('Pressure: ' + state.pressure.toLowerCase());
-    if (state.zones.length) lines.push('Focus: ' + (state.zones.length === S.zones.length ? 'whole body' : state.zones.map(id => zone(id).label).join(', ').toLowerCase()));
-    lines.push('When: ' + whenText());
+    const lines = [T('Hi {name}! I would like to book a massage.', { name: S.brand.short }), ''];
+    lines.push(T('Massage: ') + t.name + ', ' + state.minutes + T(' min'));
+    lines.push(T('Pressure: ') + T(state.pressure).toLowerCase());
+    if (state.zones.length) lines.push(T('Focus: ') + (state.zones.length === S.zones.length ? T('whole body') : state.zones.map(id => zone(id).label).join(', ').toLowerCase()));
+    lines.push(T('When: ') + whenText());
     const where = [state.place, state.area].filter(Boolean).join(', ');
-    if (where) lines.push('Where: ' + where);
-    lines.push('People: ' + state.people);
-    if (state.note) lines.push('Note: ' + state.note);
+    if (where) lines.push(T('Where: ') + where);
+    lines.push(T('People: ') + state.people);
+    if (state.note) lines.push(T('Note: ') + state.note);
     return lines.join('\n');
   }
-  const helloMessage = () => 'Hi ' + S.brand.short + '! I found you on your website. Do you have time for a massage?';
+  const helloMessage = () => T('Hi {name}! I found you on your website. Do you have time for a massage?', { name: S.brand.short });
   const price = () => (treatment(state.treatment).prices[state.minutes] || 0) * state.people;
   const waUrl = text => 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(text);
 
@@ -360,7 +367,7 @@
   $$('.js-wa').forEach(a => a.addEventListener('click', e => {
     if (!waNumber) {
       e.preventDefault();
-      say(S.draft ? 'Preview: WhatsApp opens here once the number is set.' : 'WhatsApp is not available right now.');
+      say(S.draft ? T('Preview: WhatsApp opens here once the number is set.') : T('WhatsApp is not available right now.'));
     }
   }));
 
@@ -372,15 +379,15 @@
     if (current) paintZoom();
 
     const t = treatment(state.treatment);
-    const line = t.name + ', ' + state.minutes + ' min · ' + money(t.prices[state.minutes]);
+    const line = t.name + ', ' + state.minutes + T(' min') + ' · ' + money(t.prices[state.minutes]);
     picked.textContent = '';
     if (state.zones.length) {
-      const names = state.zones.length === S.zones.length ? 'Whole body' : state.zones.map(id => zone(id).label).join(', ');
-      picked.append(el('strong', '', names + '.'), ' ' + (state.manual ? 'Your pick: ' : 'We would suggest: ') + line + '. ');
+      const names = state.zones.length === S.zones.length ? T('Whole body') : state.zones.map(id => zone(id).label).join(', ');
+      picked.append(el('strong', '', names + '.'), ' ' + (state.manual ? T('Your pick: ') : T('We would suggest: ')) + line + '. ');
     } else {
-      picked.append('Tap a spot. The view moves in, right down to the muscle fibres. ');
+      picked.append(T('Tap a spot. The view moves in, right down to the muscle fibres. '));
     }
-    const go = el('a', '', state.zones.length ? 'Book this ↓' : 'Or book straight away ↓');
+    const go = el('a', '', state.zones.length ? T('Book this ↓') : T('Or book straight away ↓'));
     go.href = '#book';
     picked.appendChild(go);
 
@@ -388,7 +395,7 @@
     const now = new Date();
     $('#ticket-time').textContent = pad(now.getHours()) + ':' + pad(now.getMinutes());
     $('#ticket-price').textContent = money(price());
-    $('#ticket-pay').textContent = (state.people > 1 ? 'for ' + state.people + ' people, ' : '') + 'paid after the massage, ' + S.facts.payment;
+    $('#ticket-pay').textContent = (state.people > 1 ? T('for {n} people, ', { n: state.people }) : '') + T('paid after the massage, ') + S.facts.payment;
 
     if (waNumber) {
       $$('.js-wa').forEach(a => {
