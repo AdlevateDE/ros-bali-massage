@@ -16,6 +16,10 @@
   const treatment = id => S.treatments.find(t => t.id === id) || S.treatments[0];
   const zone = id => S.zones.find(z => z.id === id);
   const waNumber = String((S.whatsapp && S.whatsapp.number) || '').replace(/\D/g, '');
+  const areaNames = S.areas.map(a => a.name);
+  const areaOf = () => S.areas.find(a => a.name === state.area) || null;
+  // transport fee of the chosen area: a number, null = area not in the list (fee on request), undefined = no area chosen yet
+  const transport = () => { const a = areaOf(); return a ? a.fee : (state.area === '__else' ? null : undefined); };
 
   const state = {
     zones: [],
@@ -49,13 +53,36 @@
     S.todo.forEach(t => $('#draft-list').appendChild(el('li', '', t)));
   }
 
-  $('#hero-areas').textContent = S.areas.slice(0, 4).join(', ') + (S.areas.length > 4 ? T(' and nearby') : '');
-  S.areas.forEach((a, i) => {
+  $('#hero-areas').textContent = areaNames.slice(0, 4).join(', ') + (areaNames.length > 4 ? T(' and nearby') : '');
+  areaNames.forEach((a, i) => {
     const s = el('span', '', a);
-    if (i < S.areas.length - 1) s.appendChild(el('i', '', '·'));
+    if (i < areaNames.length - 1) s.appendChild(el('i', '', '·'));
     $('#where-names').append(s, ' ');
   });
-  $('#foot-areas').textContent = S.areas.join(' · ');
+  $('#foot-areas').textContent = areaNames.join(' · ');
+
+  // transport fee by distance: areas grouped by fee, nearest first
+  (() => {
+    const list = $('#where-fees');
+    [...new Set(S.areas.map(a => a.fee))].sort((x, y) => x - y).forEach(fee => {
+      const li = el('li');
+      li.append(el('b', '', fee ? T('Transport fee {fee}', { fee: money(fee) }) : T('No transport fee')), S.areas.filter(a => a.fee === fee).map(a => a.name).join(', '));
+      list.appendChild(li);
+    });
+    const far = el('li');
+    far.append(el('b', '', T('Further away')), T('Ask. You hear the fee before you book.'));
+    list.appendChild(far);
+  })();
+
+  // FAQ entry on transport, built from the same fees so the numbers can never disagree with the booking
+  (() => {
+    const near = S.areas.filter(a => !a.fee).map(a => a.name).join(', ');
+    const list = S.areas.filter(a => a.fee).map(a => a.name + ' ' + money(a.fee)).join(', ');
+    const d = el('details');
+    d.setAttribute('data-todo', '');
+    d.append(el('summary', '', T('Is transport included?')), el('p', '', T('In {near} there is no transport fee. Further out a fee is added by distance: {list}. Anywhere else, ask and you hear the fee before you book.', { near, list })));
+    $$('.faq__list details')[3].after(d);
+  })();
   $('#foot-wa').textContent = S.whatsapp.display ? 'WhatsApp ' + S.whatsapp.display : 'WhatsApp';
 
   /* ---------- camera: put a point of the figure in the middle of a frame ---------- */
@@ -322,7 +349,8 @@
   const today = new Date();
   fDate.min = today.getFullYear() + '-' + pad(today.getMonth() + 1) + '-' + pad(today.getDate());
   fArea.appendChild(new Option(T('Area'), ''));
-  S.areas.concat(T('Somewhere else')).forEach(a => fArea.appendChild(new Option(a, a)));
+  S.areas.forEach(a => fArea.appendChild(new Option(a.name + (a.fee ? ' · + ' + money(a.fee) : T(' · no transport fee')), a.name)));
+  fArea.appendChild(new Option(T('Somewhere else · fee on request'), '__else'));
   [[fDate, 'date'], [fPlace, 'place'], [fArea, 'area'], [fNote, 'note']].forEach(([n, key]) => {
     n.addEventListener('input', () => { state[key] = n.value.trim(); state.dirty = true; update(); });
   });
@@ -346,14 +374,18 @@
     lines.push(T('Pressure: ') + T(state.pressure).toLowerCase());
     if (state.zones.length) lines.push(T('Focus: ') + (state.zones.length === S.zones.length ? T('whole body') : state.zones.map(id => zone(id).label).join(', ').toLowerCase()));
     lines.push(T('When: ') + whenText());
-    const where = [state.place, state.area].filter(Boolean).join(', ');
+    const ar = areaOf(), fee = transport();
+    const where = [state.place, ar ? ar.name : (state.area === '__else' ? T('other area') : '')].filter(Boolean).join(', ');
     if (where) lines.push(T('Where: ') + where);
     lines.push(T('People: ') + state.people);
+    if (fee !== undefined) lines.push(T('Transport: ') + (fee === null ? T('please tell me the fee') : fee ? money(fee) : T('no fee')));
+    lines.push(T('Total: ') + money(total()) + (typeof fee === 'number' ? '' : T(' plus transport')));
     if (state.note) lines.push(T('Note: ') + state.note);
     return lines.join('\n');
   }
   const helloMessage = () => T('Hi {name}! I found you on your website. Do you have time for a massage?', { name: S.brand.short });
   const price = () => (treatment(state.treatment).prices[state.minutes] || 0) * state.people;
+  const total = () => price() + (typeof transport() === 'number' ? transport() : 0); // massage for everyone + one transport fee
   const waUrl = text => 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(text);
 
   const toast = $('#toast');
@@ -394,7 +426,11 @@
     $('#ticket-msg').textContent = bookingMessage();
     const now = new Date();
     $('#ticket-time').textContent = pad(now.getHours()) + ':' + pad(now.getMinutes());
-    $('#ticket-price').textContent = money(price());
+    $('#ticket-price').textContent = money(total());
+    const ar = areaOf(), fee = transport();
+    $('#ticket-transport').textContent = fee === undefined ? T('choose your area to see the transport fee')
+      : fee === null ? T('plus a transport fee, you hear it before you book')
+      : fee ? T('incl. {fee} transport to {area}', { fee: money(fee), area: ar.name }) : T('no transport fee in {area}', { area: ar.name });
     $('#ticket-pay').textContent = (state.people > 1 ? T('for {n} people, ', { n: state.people }) : '') + T('paid after the massage, ') + S.facts.payment;
 
     if (waNumber) {

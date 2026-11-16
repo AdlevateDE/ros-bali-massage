@@ -15,8 +15,7 @@
         brings: 'minyak, handuk, dan matras',
         hours: 'Setiap hari, 09.00–21.00',
         payment: 'tunai rupiah atau QRIS',
-        cancel: '2 jam',
-        transport: 'Lokasi yang lebih jauh bisa dikenakan sedikit biaya transportasi. Anda diberi tahu sebelum memesan.'
+        cancel: '2 jam'
       },
       zones: {
         head: { label: 'Kepala', fibres: 'Kulit kepala dan pelipis', line: 'Jet lag dan terlalu lama menatap layar terasa di sini.' },
@@ -37,7 +36,7 @@
       todo: [
         'Harga asli per jenis pijat dan durasi (ini harga pasaran)',
         'Jenis pijat apa saja yang benar-benar ditawarkan tim',
-        'Area layanan, dan apakah ada biaya transportasi',
+        'Area layanan dan biaya transportasi tiap area (biaya ini masih contoh)',
         'Jam buka, cara bayar, aturan pembatalan',
         'Matras atau meja pijat? Bisa dua orang bersamaan?',
         'Nama dan foto 8 terapis',
@@ -79,7 +78,6 @@
       ['.steps__list li:nth-child(2)', '<strong>Tim membalas dengan waktu.</strong> Kalau jam itu sudah terisi, Anda ditawari jam terdekat.'],
       ['.steps__list li:nth-child(3)', '<strong>Terapis datang ke tempat Anda</strong> membawa <span data-bind="facts.brings"></span>. Anda cukup siapkan kasur, daybed, atau sedikit lantai kosong.'],
       ['.steps__list li:nth-child(4)', '<strong>Bayar setelah pijat,</strong> <span data-bind="facts.payment"></span>.'],
-      ['.where__note', 'Menginap di tempat lain? Tanyakan saja. <span data-bind="facts.transport"></span>'],
       ['.faq h2', 'Perlu <em>diketahui</em>'],
       ['.faq details:nth-of-type(1) summary', 'Apa yang perlu saya siapkan?'],
       ['.faq details:nth-of-type(1) p', 'Tempat yang tenang dan cukup untuk berbaring: kasur, daybed, atau sedikit lantai kosong. Sisanya dibawa terapis.'],
@@ -140,6 +138,23 @@
       'whole body': 'seluruh tubuh', 'time flexible': 'jam fleksibel', 'Date to be agreed': 'Tanggal menyusul',
       'for {n} people, ': 'untuk {n} orang, ',
       'paid after the massage, ': 'bayar setelah pijat, ',
+      // transport fee by distance
+      ' · no transport fee': ' · tanpa biaya transportasi',
+      'Somewhere else · fee on request': 'Tempat lain · biaya ditanyakan dulu',
+      'other area': 'area lain',
+      'incl. {fee} transport to {area}': 'termasuk {fee} transportasi ke {area}',
+      'no transport fee in {area}': 'tanpa biaya transportasi di {area}',
+      'plus a transport fee, you hear it before you book': 'ditambah biaya transportasi, diinfokan sebelum memesan',
+      'choose your area to see the transport fee': 'pilih area untuk melihat biaya transportasi',
+      'Transport: ': 'Transportasi: ', 'no fee': 'gratis', 'please tell me the fee': 'mohon infokan biayanya',
+      'Total: ': 'Total: ', ' plus transport': ' belum termasuk transportasi',
+      'No transport fee': 'Tanpa biaya transportasi',
+      'Transport fee {fee}': 'Biaya transportasi {fee}',
+      'Further away': 'Lebih jauh',
+      'Ask. You hear the fee before you book.': 'Tanyakan saja. Biaya diinfokan sebelum memesan.',
+      'Is transport included?': 'Apakah transportasi sudah termasuk?',
+      'In {near} there is no transport fee. Further out a fee is added by distance: {list}. Anywhere else, ask and you hear the fee before you book.':
+        'Di {near} tidak ada biaya transportasi. Untuk lokasi yang lebih jauh ada biaya sesuai jarak: {list}. Untuk tempat lain, tanyakan saja dan biaya diinfokan sebelum memesan.',
       // preview bar
       ' details are still examples (dashed boxes). Tap for the list.': ' hal masih contoh (kotak putus-putus). Ketuk untuk daftarnya.',
       'Preview: WhatsApp opens here once the number is set.': 'Pratinjau: WhatsApp terbuka di sini setelah nomornya diisi.',

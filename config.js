@@ -17,15 +17,22 @@ window.SITE = {
   years: 26,
   teamSize: 8,
 
-  // Areas the team travels to (first one is shown biggest)
-  areas: ["Canggu", "Pererenan", "Berawa", "Seminyak", "Umalas"],
+  // Areas the team travels to, nearest first (the first one is shown biggest).
+  // fee = transport fee in rupiah for one visit to that area, by distance. 0 = no fee.
+  // The booking adds it to the total and writes it into the WhatsApp message. EXAMPLE VALUES until Ros confirms.
+  areas: [
+    { name: "Canggu", fee: 0 },
+    { name: "Pererenan", fee: 0 },
+    { name: "Berawa", fee: 0 },
+    { name: "Umalas", fee: 30000 },
+    { name: "Seminyak", fee: 50000 }
+  ],
 
   facts: {
     brings: "oil, towels and a mat",
     hours: "Daily, 9:00 to 21:00",
     payment: "cash in rupiah or QRIS",
-    cancel: "2 hours",
-    transport: "A little further out can cost a small transport fee. You hear it before you book."
+    cancel: "2 hours"
   },
 
   // Body areas. x / y = tap point on the body picture in percent. side / lead = where the label sits
@@ -94,7 +101,7 @@ window.SITE = {
   todo: [
     "Real prices per massage and length (these are typical market prices)",
     "Which massages the team really offers",
-    "Areas, and whether travel costs extra",
+    "Areas and the transport fee for each (these fees are examples)",
     "Opening times, payment, cancellation rule",
     "Mat or table? Two people at the same time?",
     "Names and photos of the 8 therapists",
