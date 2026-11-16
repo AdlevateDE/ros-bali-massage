@@ -261,8 +261,7 @@ select.field { appearance: none; -webkit-appearance: none; padding-right: 2em; b
 .where__names span { white-space: nowrap; }
 .where__names span:first-child { color: var(--sand); font-style: italic; }
 .where__names i { font-style: normal; color: var(--sand); opacity: .4; padding-left: .2em; }
-.where__fees { list-style: none; margin: 1.8em 0 0; padding: 0; display: grid; gap: 8px; width: fit-content; max-width: 100%; font-size: 1.1rem; color: #E4DACF; }
-.where__fees b { margin-right: .5em; color: var(--sand); font-weight: 700; font-variant-numeric: tabular-nums; }
+.where__note { margin: 1.6em 0 0; max-width: 34em; font-size: 1.1rem; line-height: 1.5; color: #E4DACF; }
 
 /* FAQ */
 .faq { background: var(--sand); padding-block: clamp(64px, 9vw, 120px); }

@@ -181,7 +181,7 @@
               <p class="bubble"><span id="ticket-msg"></span><small class="bubble__meta" id="ticket-time"></small></p>
             </div>
           </div>
-          <p class="send__price" data-todo><b id="ticket-price"></b><small id="ticket-transport"></small><small id="ticket-pay"></small></p>
+          <p class="send__price" data-todo><b id="ticket-price"></b><small id="ticket-transport">A transport fee may apply. The amount is confirmed on WhatsApp.</small><small id="ticket-pay"></small></p>
           <a class="btn btn--wa btn--full js-wa" data-wa="booking" id="ticket-send" href="#book"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg><span>Send on WhatsApp</span></a>
           <p class="send__fine">Opens WhatsApp with this text. You can still change it there.</p>
         </aside>
@@ -204,7 +204,7 @@
   <section class="where" id="areas">
     <div class="wrap">
       <p class="where__names" id="where-names" data-todo></p>
-      <ul class="where__fees" id="where-fees" data-todo></ul>
+      <p class="where__note">A transport fee may apply, depending on how far away you are. The team confirms the amount on WhatsApp before you book.</p>
     </div>
   </section>
 
@@ -227,6 +227,10 @@
         <details data-todo>
           <summary>How do I pay?</summary>
           <p>After the massage, <span data-bind="facts.payment">cash in rupiah or QRIS</span>.</p>
+        </details>
+        <details>
+          <summary>Is transport included?</summary>
+          <p>A transport fee may apply, depending on how far away you are. The team confirms the amount on WhatsApp before you book.</p>
         </details>
         <details>
           <summary>Does my hotel allow it?</summary>
