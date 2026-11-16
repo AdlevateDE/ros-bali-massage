@@ -98,7 +98,6 @@ window.SITE = {
     "Areas the team travels to",
     "Opening times, payment, cancellation rule",
     "Mat or table? Two people at the same time?",
-    "Names and photos of the 8 therapists",
-    "Spelling: Ros or Ross?"
+    "Names and photos of the 8 therapists"
   ]
 };

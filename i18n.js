@@ -39,8 +39,7 @@
         'Area yang dilayani tim',
         'Jam buka, cara bayar, aturan pembatalan',
         'Matras atau meja pijat? Bisa dua orang bersamaan?',
-        'Nama dan foto 8 terapis',
-        'Ejaan nama: Ros atau Ross?'
+        'Nama dan foto 8 terapis'
       ]
     },
 
