@@ -286,13 +286,15 @@
 
   /* ---------- instagram (only when a profile name is set in config.js) ---------- */
   if (S.instagram) {
-    const igLink = text => { const a = el('a', '', text); a.href = 'https://www.instagram.com/' + S.instagram + '/'; a.target = '_blank'; a.rel = 'noopener'; return a; };
+    const igUrl = 'https://www.instagram.com/' + S.instagram + '/';
+    // buttons in the top bar and in the footer
+    $$('.js-ig').forEach(a => { a.href = igUrl; a.hidden = false; });
+    // text link under the team
     const more = el('p', 'team__more', T('More from {name} on Instagram: ', { name: S.brand.short }));
-    more.appendChild(igLink('@' + S.instagram));
+    const link = el('a', '', '@' + S.instagram);
+    link.href = igUrl; link.target = '_blank'; link.rel = 'noopener';
+    more.appendChild(link);
     $('#team-grid').after(more);
-    const foot = igLink('Instagram');
-    foot.id = 'foot-ig';
-    $('.foot__meta p:nth-child(3)').append(el('br'), foot);
   }
 
   /* ---------- builder controls ---------- */
