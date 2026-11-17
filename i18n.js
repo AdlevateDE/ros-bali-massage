@@ -27,17 +27,16 @@
         feet: { label: 'Telapak kaki', fibres: 'Fasia plantar', line: 'Seharian pakai sandal jepit di aspal panas.' }
       },
       treatments: {
-        balinese: { name: 'Pijat Bali', blurb: 'Usapan panjang, tekanan telapak tangan dan ibu jari, minyak kelapa hangat. Pijat seluruh tubuh yang klasik.', shown: 'Menyala: otot punggung panjang dan latissimus' },
-        deep: { name: 'Deep tissue', blurb: 'Tekanan pelan dan kuat pada simpul otot di punggung, bahu, dan kaki. Cocok setelah berselancar atau penerbangan panjang.', shown: 'Menyala: serat trapezius dan simpul otot di belikat' },
-        feet: { name: 'Refleksi kaki', blurb: 'Titik-titik tekan di telapak kaki dan betis. Cocok setelah seharian berjalan.', shown: 'Menyala: otot betis dan tendon Achilles' },
+        balinese: { name: 'Pijat Bali', blurb: 'Usapan panjang, tekanan telapak tangan dan ibu jari, minyak hangat. Pijat seluruh tubuh yang klasik.', shown: 'Menyala: otot punggung panjang dan latissimus' },
+        deep: { name: 'Punggung & bahu', blurb: 'Pijat Bali yang sama, dengan waktu lebih banyak untuk simpul otot di punggung dan bahu. Cocok setelah berselancar atau penerbangan panjang.', shown: 'Menyala: serat trapezius dan simpul otot di belikat' },
+        feet: { name: 'Pijat kaki', blurb: 'Seluruh waktu untuk telapak kaki dan betis. Cocok setelah seharian berjalan.', shown: 'Menyala: otot betis dan tendon Achilles' },
         head: { name: 'Kepala, leher & bahu', blurb: 'Untuk leher kaku karena kerja di meja dan bahu pegal karena naik motor. Rambut tidak kena minyak kecuali Anda minta.', shown: 'Menyala: otot leher dan trapezius atas' }
       },
       teamRoles: { 'Founder, 26 years': 'Pendiri, 26 tahun' },
+      shots: ['Dalam perjalanan ke tamu', 'Kunjungan malam di vila', 'Ros sedang memijat', 'Dua tamu, dua terapis'],
       todo: [
-        'Harga untuk 90 dan 120 menit (harga 60 menit sudah dikonfirmasi)',
-        'Jenis pijat di menu: hanya pijat Bali, atau keempatnya?',
-        'Area yang dilayani tim: seluruh Bali, atau hanya sekitar Denpasar?',
-        'Nama dan foto 8 terapis'
+        'Harga untuk 90 dan 120 menit (harga 60 menit sudah dikonfirmasi Ros)',
+        'Daftar area (kata Ros: semua area di Bali)'
       ]
     },
 
@@ -54,7 +53,8 @@
       ['#zoom-book', 'Pesan ↓'],
       ['#statement', 'Ros sudah memijat selama <span data-bind="years">26</span> tahun. Sekarang ia memimpin tim berisi <span data-bind="teamSize">8</span> terapis. Anda kirim pesan, salah satu dari mereka datang ke tempat Anda membawa <span data-bind="facts.brings"></span>. Anda cukup menunggu di tempat.'],
       ['.scene--intro h2', 'Menu singkat, <em>memang sengaja.</em>'],
-      ['.scene--intro p', 'Empat jenis pijat. Masing-masing untuk bagian tubuh yang berbeda.'],
+      ['.scene--intro p', 'Satu pijat Bali. Anda yang menentukan fokusnya.'],
+      ['.shots__label', 'Foto asli dari HP kami saat bertugas. Bukan foto stok.'],
       ['.team__head h2', '<span data-bind="years">26</span> tahun pengalaman di tangannya. <em>Tujuh terapis lain di sisinya.</em>'],
       ['.team__head p', 'Satu nomor WhatsApp untuk seluruh tim. Kalau cocok dengan salah satu terapis, sebut namanya saat memesan lagi.'],
       ['.book__head h2', 'Susun pesanan Anda.'],
@@ -93,6 +93,7 @@
       ['.faq details:nth-of-type(8) summary', 'Apakah ini pijat profesional?'],
       ['.faq details:nth-of-type(8) p', 'Ya. Hanya pijat terapi, dengan kain penutup yang sopan. Permintaan lain akan mengakhiri pesanan.'],
       ['.where__note', 'Mungkin ada biaya transportasi, tergantung jarak lokasi Anda. Tim mengonfirmasi jumlahnya lewat WhatsApp sebelum Anda memesan.'],
+      ['.where__else', 'Menginap di tempat lain di Bali? Kirim pesan saja, tim melayani seluruh pulau.'],
       ['#ticket-transport', 'Mungkin ada biaya transportasi. Jumlahnya dikonfirmasi lewat WhatsApp.'],
       ['.foot__big', 'Punggung pegal? <a class="js-wa" data-wa="hello" href="#book"><em>Hubungi <span data-bind="brand.short">Ros</span>.</em></a>'],
       ['.foot__meta p:nth-child(3)', '<a href="#massages">Jenis pijat</a><br><a href="#book">Pemesanan</a>'],
@@ -206,6 +207,7 @@
     t.name = tr.name; t.blurb = tr.blurb; t.film.shown = tr.shown;
   });
   S.team.forEach(m => { if (m.role && ID.site.teamRoles[m.role]) m.role = ID.site.teamRoles[m.role]; });
+  (S.shots || []).forEach((s, i) => { if (ID.site.shots[i]) s.caption = ID.site.shots[i]; else missing.push('shot ' + i); });
   S.todo = ID.site.todo;
 
   /* ---------- fixed page texts ---------- */

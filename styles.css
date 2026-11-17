@@ -215,6 +215,20 @@ h1 em { color: var(--clay); }
 .member--lead .member__pic { box-shadow: 0 0 0 2px var(--sand); }
 .member small { font-weight: 500; opacity: .85; }
 .member--empty .member__pic { background: none; border: 1.5px dashed rgba(243, 236, 228, .6); font: 600 .8rem/1 var(--text); }
+/* Ros alone: her circle on the left, the snapshots beside her. With more people the circles get the full width. */
+.team__row { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+.team__row--solo { grid-template-columns: minmax(120px, 168px) minmax(0, 1fr); }
+.team__grid--solo { grid-template-columns: minmax(0, 1fr); }
+/* Snapshots: real phone photos, shown as small prints so their size and grain fit */
+.shots__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 2vw, 26px); }
+.shot { background: var(--sand); color: var(--ink); padding: 8px 8px 0; border-radius: 3px; box-shadow: 0 18px 34px -18px rgba(30, 21, 16, .7); transform: rotate(var(--tilt, 0deg)); }
+.shot:nth-child(4n+1) { --tilt: -1.6deg; }
+.shot:nth-child(4n+2) { --tilt: 1.2deg; }
+.shot:nth-child(4n+3) { --tilt: -.8deg; }
+.shot:nth-child(4n+4) { --tilt: 1.7deg; }
+.shot img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 2px; }
+.shot__cap { display: block; padding: 9px 4px 11px; font: italic 400 1.18rem/1.15 var(--display); text-align: center; }
+.shots__label { margin: clamp(18px, 2.6vw, 28px) 0 0; font-size: .98rem; }
 .team__more { margin: clamp(26px, 4vw, 44px) 0 0; font-size: 1.05rem; }
 .team__more a { font-weight: 600; text-underline-offset: 4px; }
 
@@ -271,6 +285,7 @@ select.field { appearance: none; -webkit-appearance: none; padding-right: 2em; b
 .where__names span:first-child { color: var(--sand); font-style: italic; }
 .where__names i { font-style: normal; color: var(--sand); opacity: .4; padding-left: .2em; }
 .where__note { margin: 1.6em 0 0; max-width: 34em; font-size: 1.1rem; line-height: 1.5; color: #E4DACF; }
+.where__else { margin: .7em 0 0; max-width: 34em; font-size: 1.1rem; line-height: 1.5; color: #E4DACF; }
 
 /* FAQ */
 .faq { background: var(--sand); padding-block: clamp(64px, 9vw, 120px); }
@@ -324,6 +339,9 @@ select.field { appearance: none; -webkit-appearance: none; padding-right: 2em; b
   .film--live .scene h3 { font-size: clamp(2.3rem, 10vw, 3.2rem); }
   .film--live .scene p { font-size: 1.02rem; }
   .team__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .team__row--solo { grid-template-columns: minmax(0, 1fr); }
+  .team__grid--solo { grid-template-columns: 124px; }
+  .shots__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; }
   .send { position: static; }
   .foot__meta { grid-template-columns: minmax(0, 1fr); gap: 16px; }
 }

@@ -21,7 +21,9 @@ window.SITE = {
   // Areas the team travels to, nearest first (the first one is shown biggest).
   // Transport fees are NOT listed on purpose (we do not know them): the page only says a fee may apply
   // and that the amount is confirmed on WhatsApp.
-  areas: ["Canggu", "Pererenan", "Berawa", "Umalas", "Seminyak"],
+  // Ros, 17.11.2026: "all area on Bali", she is based in Denpasar Barat. Listed: the visitor areas within
+  // about 40 minutes of her; everything else goes through "Somewhere else" and the note under the list.
+  areas: ["Canggu", "Seminyak", "Kerobokan", "Umalas", "Berawa", "Pererenan", "Legian", "Kuta", "Denpasar", "Sanur"],
 
   // Confirmed by Ros on WhatsApp, 17.11.2026 ("never closed 24 hour ready", payment "all ok",
   // cancel "2 hour before", "team bring oil and sarung", massage bed "extra 100k").
@@ -47,11 +49,14 @@ window.SITE = {
   ],
 
   // Prices per person in rupiah. Leave a length out if it is not offered.
+  // Ros, 17.11.2026: "balinese massage only" and "60 = same price like your website". So there is ONE massage
+  // (Balinese) at one price per length; the four entries are the same massage with a different focus.
+  // 60 minutes = 250,000 is confirmed. 90 and 120 minutes are the values she saw on the page and did not correct.
   treatments: [
     {
       id: "balinese",
       name: "Balinese massage",
-      blurb: "Long strokes, palm and thumb pressure, warm coconut oil. The classic full-body massage.",
+      blurb: "Long strokes, palm and thumb pressure, warm oil. The classic full-body massage.",
       prices: { 60: 250000, 90: 350000, 120: 450000 },
       // film: where the camera looks (x / y in percent of the picture, s = zoom), which side the text sits on,
       // which anatomy lights up (back, blade, calves, neck)
@@ -59,16 +64,16 @@ window.SITE = {
     },
     {
       id: "deep",
-      name: "Deep tissue",
-      blurb: "Slow, firm work on knots in the back, shoulders and legs. Good after surfing or a long flight.",
-      prices: { 60: 280000, 90: 390000, 120: 500000 },
+      name: "Back & shoulders",
+      blurb: "The same Balinese massage, with the time spent on knots in the back and shoulders. Good after surfing or a long flight.",
+      prices: { 60: 250000, 90: 350000, 120: 450000 },
       film: { x: 57, y: 31.8, s: 4.6, side: "right", anat: "blade", shown: "Lighting up: trapezius fibres and a knot at the shoulder blade" }
     },
     {
       id: "feet",
-      name: "Foot reflexology",
-      blurb: "Pressure points on feet and calves. Good after a day of walking.",
-      prices: { 60: 220000, 90: 320000 },
+      name: "Foot massage",
+      blurb: "Feet and calves get the whole time. Good after a day of walking.",
+      prices: { 60: 250000, 90: 350000 },
       film: { x: 50, y: 79.5, s: 3.6, side: "left", anat: "calves", shown: "Lighting up: calf muscles and Achilles tendons",
               phone: { y: 81, s: 3.2 } } // phones: a bit further back, so the feet stay above the text
     },
@@ -76,32 +81,32 @@ window.SITE = {
       id: "head",
       name: "Head, neck & shoulders",
       blurb: "For desk necks and scooter shoulders. No oil in your hair unless you ask.",
-      prices: { 60: 230000, 90: 330000 },
+      prices: { 60: 250000, 90: 350000 },
       film: { x: 50, y: 24.6, s: 4.2, side: "right", anat: "neck", shown: "Lighting up: neck muscles and upper trapezius" }
     }
   ],
 
   defaults: { treatment: "balinese", minutes: 90 },
 
-  // Team: Ros first. Add name + photo per person; empty entries show as placeholders in the draft only.
+  // Team: Ros first. More people can be added later with name + photo (they then show as circles next to her).
+  // Decision 17.11.2026: no more questions to Ros about names and portraits, the snapshots below show the team.
   team: [
-    { name: "Ros", role: "Founder, 26 years", photo: "assets/team_ros.webp" }, // her WhatsApp profile picture, see tools/prep_ros_photos.py
-    { name: "", role: "", photo: "" },
-    { name: "", role: "", photo: "" },
-    { name: "", role: "", photo: "" },
-    { name: "", role: "", photo: "" },
-    { name: "", role: "", photo: "" },
-    { name: "", role: "", photo: "" },
-    { name: "", role: "", photo: "" }
+    { name: "Ros", role: "Founder, 26 years", photo: "assets/team_ros.webp" } // her WhatsApp profile picture, see tools/prep_ros_photos.py
   ],
 
-  // Shown in the preview banner (English, so Ros can read it too)
-  // Confirmed on 17.11.2026 and no longer listed: name, opening times, payment, cancellation,
-  // what the team brings, massage bed, two people at once, everyone can book.
+  // Snapshots in the team section: Ros's own phone photos (WhatsApp 17.11.2026 and her Instagram),
+  // cut square by tools/prep_ros_photos.py. No guest can be recognised on any of them.
+  shots: [
+    { src: "assets/shot_way.webp", caption: "On the way to a guest" },
+    { src: "assets/shot_villa.webp", caption: "Evening visit at a villa" },
+    { src: "assets/shot_work.webp", caption: "Ros at work" },
+    { src: "assets/shot_two.webp", caption: "Two guests, two therapists" }
+  ],
+
+  // Shown in the preview banner (English, so Ros can read it too).
+  // Everything else is confirmed by Ros (17.11.2026) or settled without her; these two are assumptions.
   todo: [
-    "Prices for 90 and 120 minutes (60 minutes is confirmed)",
-    "Which massages go on the menu: Balinese massage only, or all four?",
-    "Areas the team travels to: all of Bali, or only around Denpasar?",
-    "Names and photos of the 8 therapists"
+    "Prices for 90 and 120 minutes (60 minutes is confirmed by Ros)",
+    "List of areas (Ros said: all areas of Bali)"
   ]
 };

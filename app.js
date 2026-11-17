@@ -283,7 +283,20 @@
       if (m.role) li.appendChild(el('small', '', m.role));
       grid.appendChild(li);
     });
-    if (people.length <= 1 && !S.draft) grid.hidden = true;
+    if (!people.length) grid.hidden = true;
+    grid.classList.toggle('team__grid--solo', people.length === 1);
+    grid.closest('.team__row').classList.toggle('team__row--solo', people.length === 1);
+
+    // snapshots: Ros's own phone photos, shown like small prints
+    const shots = S.shots || [];
+    shots.forEach(s => {
+      const li = el('li', 'shot');
+      const img = new Image();
+      img.src = s.src; img.alt = s.caption; img.loading = 'lazy'; img.width = 640; img.height = 640;
+      li.append(img, el('span', 'shot__cap', s.caption));
+      $('#shots').appendChild(li);
+    });
+    $('#shots-block').hidden = !shots.length;
   })();
 
   /* ---------- instagram (only when a profile name is set in config.js) ---------- */
@@ -296,7 +309,7 @@
     const link = el('a', '', '@' + S.instagram);
     link.href = igUrl; link.target = '_blank'; link.rel = 'noopener';
     more.appendChild(link);
-    $('#team-grid').after(more);
+    $('.team__row').after(more);
   }
 
   /* ---------- builder controls ---------- */
