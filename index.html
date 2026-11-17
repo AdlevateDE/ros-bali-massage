@@ -96,7 +96,7 @@
 
   <section class="statement">
     <div class="wrap">
-      <p class="statement__text" id="statement">Ros has been giving massages for <span data-bind="years">26</span> years. Today she runs a team of <span data-bind="teamSize">8</span> therapists. You send a message, one of them comes to your door with oil, towels and a mat, and you stay right where you are.</p>
+      <p class="statement__text" id="statement">Ros has been giving massages for <span data-bind="years">26</span> years. Today she runs a team of <span data-bind="teamSize">8</span> therapists. You send a message, one of them comes to your door with <span data-bind="facts.brings">oil and a sarong</span>, and you stay right where you are.</p>
     </div>
   </section>
 
@@ -201,8 +201,8 @@
       <ol class="steps__list">
         <li><strong>You send the message.</strong> Nothing is booked yet.</li>
         <li><strong>The team replies with a time.</strong> If your slot is taken, you get the nearest one.</li>
-        <li data-todo><strong>A therapist comes to you</strong> with <span data-bind="facts.brings">oil, towels and a mat</span>. You need a bed, a daybed or a clear bit of floor.</li>
-        <li data-todo><strong>You pay after the massage,</strong> <span data-bind="facts.payment">cash in rupiah or QRIS</span>.</li>
+        <li><strong>A therapist comes to you</strong> with <span data-bind="facts.brings">oil and a sarong</span>. You need a bed, a daybed or a clear bit of floor.</li>
+        <li><strong>You pay after the massage,</strong> <span data-bind="facts.payment">cash in rupiah, QRIS or bank transfer</span>.</li>
       </ol>
     </div>
   </section>
@@ -220,9 +220,9 @@
       <div class="faq__list">
         <details>
           <summary>What do I need to prepare?</summary>
-          <p>A quiet spot with room to lie down: a bed, a daybed or a clear bit of floor. The therapist brings the rest.</p>
+          <p>A quiet spot with room to lie down: a bed, a daybed or a clear bit of floor. The therapist brings <span data-bind="facts.brings">oil and a sarong</span>. Prefer a massage bed? The team brings one for <span id="faq-bed-fee">Rp 100,000</span> extra, just write it in your message.</p>
         </details>
-        <details data-todo>
+        <details>
           <summary>Can two of us get a massage at the same time?</summary>
           <p>Yes. Two therapists come together, so nobody has to wait. Pick 2 people in the booking.</p>
         </details>
@@ -230,9 +230,9 @@
           <summary>Will Ros come herself?</summary>
           <p>Sometimes Ros, sometimes one of her seven colleagues. If you want a certain therapist, write the name in your message and the team will try to make it work.</p>
         </details>
-        <details data-todo>
+        <details>
           <summary>How do I pay?</summary>
-          <p>After the massage, <span data-bind="facts.payment">cash in rupiah or QRIS</span>.</p>
+          <p>After the massage, <span data-bind="facts.payment">cash in rupiah, QRIS or bank transfer</span>.</p>
         </details>
         <details>
           <summary>Is transport included?</summary>
@@ -242,7 +242,7 @@
           <summary>Does my hotel allow it?</summary>
           <p>Villas and guesthouses usually do. Some resorts do not let outside therapists in. If you are unsure, ask reception before you book.</p>
         </details>
-        <details data-todo>
+        <details>
           <summary>What if I need to cancel?</summary>
           <p>Send a WhatsApp as early as you can. There is no fee if you cancel at least <span data-bind="facts.cancel">2 hours</span> before.</p>
         </details>
@@ -262,7 +262,7 @@
     <p class="foot__social"><a class="btn btn--ig js-ig" id="foot-ig" hidden target="_blank" rel="noopener"><svg class="ig" aria-hidden="true"><use href="#i-ig"/></svg><span>Instagram</span></a></p>
     <div class="foot__meta">
       <p><strong data-bind="brand.name">Ros Bali Massage</strong><br><span id="foot-areas"></span></p>
-      <p data-todo><span data-bind="facts.hours">Daily, 9:00 to 21:00</span><br><span id="foot-wa"></span></p>
+      <p><span data-bind="facts.hours">Every day, 24 hours</span><br><span id="foot-wa"></span></p>
       <p><a href="#massages">Massages</a><br><a href="#book">Booking</a></p>
     </div>
     <p class="foot__credit">Website by <a href="https://adlevate.de" target="_blank" rel="noopener">Adlevate</a></p>

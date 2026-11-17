@@ -40,6 +40,8 @@
     if (v != null && v !== '') n.textContent = v;
   });
   document.title = S.brand.name;
+  // extra charge for a massage bed (FAQ "What do I need to prepare?")
+  if ($('#faq-bed-fee') && S.facts.bedFee) $('#faq-bed-fee').textContent = money(S.facts.bedFee);
 
   if (S.draft) {
     document.documentElement.classList.add('is-draft');

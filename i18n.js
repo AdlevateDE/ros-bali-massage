@@ -12,9 +12,9 @@
   const ID = {
     site: {
       facts: {
-        brings: 'minyak, handuk, dan matras',
-        hours: 'Setiap hari, 09.00–21.00',
-        payment: 'tunai rupiah atau QRIS',
+        brings: 'minyak dan sarung',
+        hours: 'Setiap hari, 24 jam',
+        payment: 'tunai rupiah, QRIS, atau transfer bank',
         cancel: '2 jam'
       },
       zones: {
@@ -34,13 +34,10 @@
       },
       teamRoles: { 'Founder, 26 years': 'Pendiri, 26 tahun' },
       todo: [
-        'Harga asli per jenis pijat dan durasi (ini harga pasaran)',
-        'Jenis pijat apa saja yang benar-benar ditawarkan tim',
-        'Area yang dilayani tim',
-        'Jam buka, cara bayar, aturan pembatalan',
-        'Matras atau meja pijat? Bisa dua orang bersamaan?',
-        'Nama dan foto 8 terapis',
-        'Siapa yang bisa memesan: hanya wanita, pasangan, dan grup (seperti di Instagram), atau pria sendirian juga?'
+        'Harga untuk 90 dan 120 menit (harga 60 menit sudah dikonfirmasi)',
+        'Jenis pijat di menu: hanya pijat Bali, atau keempatnya?',
+        'Area yang dilayani tim: seluruh Bali, atau hanya sekitar Denpasar?',
+        'Nama dan foto 8 terapis'
       ]
     },
 
@@ -55,7 +52,7 @@
       ['.hero__cta .btn--ghost', 'Lihat jenis pijat'],
       ['#zoom-back', '← Seluruh tubuh'],
       ['#zoom-book', 'Pesan ↓'],
-      ['#statement', 'Ros sudah memijat selama <span data-bind="years">26</span> tahun. Sekarang ia memimpin tim berisi <span data-bind="teamSize">8</span> terapis. Anda kirim pesan, salah satu dari mereka datang ke tempat Anda membawa minyak, handuk, dan matras. Anda cukup menunggu di tempat.'],
+      ['#statement', 'Ros sudah memijat selama <span data-bind="years">26</span> tahun. Sekarang ia memimpin tim berisi <span data-bind="teamSize">8</span> terapis. Anda kirim pesan, salah satu dari mereka datang ke tempat Anda membawa <span data-bind="facts.brings"></span>. Anda cukup menunggu di tempat.'],
       ['.scene--intro h2', 'Menu singkat, <em>memang sengaja.</em>'],
       ['.scene--intro p', 'Empat jenis pijat. Masing-masing untuk bagian tubuh yang berbeda.'],
       ['.team__head h2', '<span data-bind="years">26</span> tahun pengalaman di tangannya. <em>Tujuh terapis lain di sisinya.</em>'],
@@ -80,7 +77,7 @@
       ['.steps__list li:nth-child(4)', '<strong>Bayar setelah pijat,</strong> <span data-bind="facts.payment"></span>.'],
       ['.faq h2', 'Perlu <em>diketahui</em>'],
       ['.faq details:nth-of-type(1) summary', 'Apa yang perlu saya siapkan?'],
-      ['.faq details:nth-of-type(1) p', 'Tempat yang tenang dan cukup untuk berbaring: kasur, daybed, atau sedikit lantai kosong. Sisanya dibawa terapis.'],
+      ['.faq details:nth-of-type(1) p', 'Tempat yang tenang dan cukup untuk berbaring: kasur, daybed, atau sedikit lantai kosong. Terapis membawa <span data-bind="facts.brings"></span>. Ingin memakai ranjang pijat? Tim bisa membawanya dengan tambahan <span id="faq-bed-fee"></span>, cukup tulis di pesan Anda.'],
       ['.faq details:nth-of-type(2) summary', 'Bisakah dua orang dipijat bersamaan?'],
       ['.faq details:nth-of-type(2) p', 'Bisa. Dua terapis datang bersama, jadi tidak ada yang menunggu. Pilih 2 orang saat memesan.'],
       ['.faq details:nth-of-type(3) summary', 'Apakah Ros sendiri yang datang?'],

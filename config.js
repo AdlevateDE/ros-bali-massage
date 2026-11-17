@@ -23,11 +23,14 @@ window.SITE = {
   // and that the amount is confirmed on WhatsApp.
   areas: ["Canggu", "Pererenan", "Berawa", "Umalas", "Seminyak"],
 
+  // Confirmed by Ros on WhatsApp, 17.11.2026 ("never closed 24 hour ready", payment "all ok",
+  // cancel "2 hour before", "team bring oil and sarung", massage bed "extra 100k").
   facts: {
-    brings: "oil, towels and a mat",
-    hours: "Daily, 9:00 to 21:00",
-    payment: "cash in rupiah or QRIS",
-    cancel: "2 hours"
+    brings: "oil and a sarong",
+    hours: "Every day, 24 hours",
+    payment: "cash in rupiah, QRIS or bank transfer",
+    cancel: "2 hours",
+    bedFee: 100000 // extra charge in rupiah when the team brings a massage bed
   },
 
   // Body areas. x / y = tap point on the body picture in percent. side / lead = where the label sits
@@ -93,13 +96,12 @@ window.SITE = {
   ],
 
   // Shown in the preview banner (English, so Ros can read it too)
+  // Confirmed on 17.11.2026 and no longer listed: name, opening times, payment, cancellation,
+  // what the team brings, massage bed, two people at once, everyone can book.
   todo: [
-    "Real prices per massage and length (these are typical market prices)",
-    "Which massages the team really offers",
-    "Areas the team travels to",
-    "Opening times, payment, cancellation rule",
-    "Mat or table? Two people at the same time?",
-    "Names and photos of the 8 therapists",
-    "Who can book: women, couples and groups only (as on Instagram), or men on their own too?"
+    "Prices for 90 and 120 minutes (60 minutes is confirmed)",
+    "Which massages go on the menu: Balinese massage only, or all four?",
+    "Areas the team travels to: all of Bali, or only around Denpasar?",
+    "Names and photos of the 8 therapists"
   ]
 };
