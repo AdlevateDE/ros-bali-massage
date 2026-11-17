@@ -62,8 +62,11 @@ p { margin: 0; text-wrap: pretty; }
 .btn--ghost { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; }
 .btn--clay { background: var(--clay); color: var(--night); }
 .btn--line { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; }
-.btn--icon { width: 42px; padding: 0; background: transparent; color: var(--sand); box-shadow: inset 0 0 0 1.5px rgba(243, 236, 228, .35); }
-.btn--icon:hover, .foot__social .btn:hover { background: rgba(243, 236, 228, .12); }
+/* Instagram button in Instagram's colours (like the WhatsApp button in WhatsApp green). The pale orange sits only in the
+   corner: under the label the gradient is never lighter than #D62976, which keeps white text readable (4.7:1). */
+.btn--ig { background: linear-gradient(45deg, #FA7E1E 0%, #D62976 30%, #962FBF 68%, #4F5BD5 100%); color: #fff; box-shadow: 0 10px 26px -12px rgba(214, 41, 118, .7); }
+.btn--ig:hover { filter: brightness(1.08); }
+.btn--icon { width: 42px; padding: 0; }
 .ig { width: 1.35em; height: 1.35em; flex: none; }
 [hidden] { display: none !important; } /* .btn sets display itself, so "hidden" needs this to win */
 
