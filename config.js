@@ -9,7 +9,8 @@ window.SITE = {
   // Digits only, with country code, no plus sign. Example: "6281234567890". Empty = not set yet.
   whatsapp: { number: "6289676872702", display: "+62 896-7687-2702" },
 
-  instagram: "",
+  // Instagram profile name without @ (Ros sent it on WhatsApp, 16.11.2026). Empty = no Instagram links on the page.
+  instagram: "ros.homemassage",
 
   currency: "Rp",
 
@@ -81,7 +82,7 @@ window.SITE = {
 
   // Team: Ros first. Add name + photo per person; empty entries show as placeholders in the draft only.
   team: [
-    { name: "Ros", role: "Founder, 26 years", photo: "" },
+    { name: "Ros", role: "Founder, 26 years", photo: "assets/team_ros.webp" }, // her WhatsApp profile picture, see tools/prep_ros_photos.py
     { name: "", role: "", photo: "" },
     { name: "", role: "", photo: "" },
     { name: "", role: "", photo: "" },
@@ -98,6 +99,7 @@ window.SITE = {
     "Areas the team travels to",
     "Opening times, payment, cancellation rule",
     "Mat or table? Two people at the same time?",
-    "Names and photos of the 8 therapists"
+    "Names and photos of the 8 therapists",
+    "Who can book: women, couples and groups only (as on Instagram), or men on their own too?"
   ]
 };

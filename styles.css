@@ -208,6 +208,8 @@ h1 em { color: var(--clay); }
 .member--lead .member__pic { box-shadow: 0 0 0 2px var(--sand); }
 .member small { font-weight: 500; opacity: .85; }
 .member--empty .member__pic { background: none; border: 1.5px dashed rgba(243, 236, 228, .6); font: 600 .8rem/1 var(--text); }
+.team__more { margin: clamp(26px, 4vw, 44px) 0 0; font-size: 1.05rem; }
+.team__more a { font-weight: 600; text-underline-offset: 4px; }
 
 /* Builder */
 .book { background: var(--sand); padding-block: clamp(64px, 9vw, 120px); }

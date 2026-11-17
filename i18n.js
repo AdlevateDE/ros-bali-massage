@@ -39,7 +39,8 @@
         'Area yang dilayani tim',
         'Jam buka, cara bayar, aturan pembatalan',
         'Matras atau meja pijat? Bisa dua orang bersamaan?',
-        'Nama dan foto 8 terapis'
+        'Nama dan foto 8 terapis',
+        'Siapa yang bisa memesan: hanya wanita, pasangan, dan grup (seperti di Instagram), atau pria sendirian juga?'
       ]
     },
 
@@ -134,6 +135,7 @@
       'Area': 'Area', 'Somewhere else': 'Tempat lain',
       'Choose this': 'Pilih ini',
       'Photo': 'Foto', 'Name': 'Nama',
+      'More from {name} on Instagram: ': 'Lihat lebih banyak dari {name} di Instagram: ',
       // message
       'Hi {name}! I would like to book a massage.': 'Halo {name}! Saya ingin memesan pijat.',
       'Hi {name}! I found you on your website. Do you have time for a massage?': 'Halo {name}! Saya menemukan Anda lewat website. Apakah ada waktu untuk pijat?',
